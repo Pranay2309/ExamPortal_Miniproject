@@ -1,0 +1,47 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Online Examination Portal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  
+    <div class="col-md-5 offset-md-5 mx-auto" style="width: 500px;margin-left: 500px; margin-top: 50px;margin-right: 250px;"> 
+        <form class="text-center border border-light " method="POST">{% csrf_token %}
+             <p class="h4 mb-4 ">Online Examination Registration</p><br>
+        
+          <input type="text" id="email" name="username" class="form-control mb-4" placeholder="Username">
+          <br><br>
+        
+          <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password">
+        
+            <div class="d-flex justify-content-around">
+                <br>
+                <br>
+                
+            </div>
+        
+          <button class="btn btn-info btn-block my-4" type="submit">Start Exam</button><br>
+          
+          {% if user.is_authenticated %}
+          {{ user.username }}
+          
+          {% else %}
+          <a href="{% provider_login_url 'google' %}">Login With Google</a>
+          {% endif %}
+        
+
+
+
+        </form>
+        </div>
+        
+
+</body>
+</html>
