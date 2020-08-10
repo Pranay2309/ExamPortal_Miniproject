@@ -121,12 +121,14 @@ def start(request,id):
             sum=sum+1
         elif (xyz[0]['correct7']==None):
             notattempt = notattempt+1
-        percentage = (sum*100)/7
+        percentage = round((sum*100)/7,2)
+        total = 7
+        print(total)
 
         attempted=7-notattempt
         Answerset.objects.filter(student=request.user).update(marks=percentage)
         send = Answerset.objects.filter(student=request.user).values()
-        return render(request,"result.html",{'data':send,'sum':sum,'attempted':attempted})
+        return render(request,"result.html",{'data':send,'sum':sum,'attempted':attempted,'total':total})
     else:
         x = Questions.objects.filter(Question_No=id).values()
         return render(request,"start.html",{'question':x[0]['Question'],'id':x[0]['id'],'opt1':x[0]['option1'],'opt2':x[0]['option2'],'opt3':x[0]['option3'],'opt4':x[0]['option4']})
